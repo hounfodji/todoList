@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todolist_app/auth/auth_page.dart';
 import 'package:todolist_app/screen/login.dart';
+import 'package:todolist_app/screen/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LogIn_Screen(),
+      home: Auth_Page(),
       );
     
   }

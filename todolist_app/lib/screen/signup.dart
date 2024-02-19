@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:todolist_app/const/colors.dart';
 
-class LogIn_Screen extends StatefulWidget {
+class SignUp_Screen extends StatefulWidget {
   final VoidCallback show;
-  LogIn_Screen(this.show, {super.key});
+  SignUp_Screen(this.show, {super.key});
 
   @override
-  State<LogIn_Screen> createState() => _LogIn_ScreenState();
+  State<SignUp_Screen> createState() => _SignUp_ScreenState();
 }
 
-class _LogIn_ScreenState extends State<LogIn_Screen> {
+class _SignUp_ScreenState extends State<SignUp_Screen> {
   FocusNode _focusNode1 = FocusNode();
   FocusNode _focusNode2 = FocusNode();
+  FocusNode _focusNode3 = FocusNode();
 
   final email = TextEditingController();
   final password = TextEditingController();
+  final passwordConfirm = TextEditingController();
 
-  @override
+   @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -25,6 +27,10 @@ class _LogIn_ScreenState extends State<LogIn_Screen> {
     });
     super.initState();
     _focusNode2.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+    _focusNode3.addListener(() {
       setState(() {});
     });
   }
@@ -49,11 +55,17 @@ class _LogIn_ScreenState extends State<LogIn_Screen> {
             ),
             textfield(email, _focusNode1, "Email", Icons.email),
 
-            // login textField password
+             // login textField password
             const SizedBox(
               height: 10,
             ),
             textfield(password, _focusNode2, "Password", Icons.password),
+
+             // login textField password
+            const SizedBox(
+              height: 10,
+            ),
+            textfield(passwordConfirm, _focusNode3, "Confirm password", Icons.password),
 
             // account
             const SizedBox(height: 8),
@@ -63,8 +75,8 @@ class _LogIn_ScreenState extends State<LogIn_Screen> {
               height: 20,
             ),
 
-            // login button
-            login_button(),
+            // signup button
+            signup_button(),
 
             // ),
           ],
@@ -80,14 +92,14 @@ class _LogIn_ScreenState extends State<LogIn_Screen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Text(
-            "Don't have an account?",
+            "Already have an account?",
             style: TextStyle(color: Colors.grey[700], fontSize: 14),
           ),
           const SizedBox(width: 5),
           GestureDetector(
             onTap: widget.show,
             child: const Text(
-              'Sign UP',
+              'Login',
               style: TextStyle(
                   color: Colors.blue,
                   fontSize: 14,
@@ -99,7 +111,7 @@ class _LogIn_ScreenState extends State<LogIn_Screen> {
     );
   }
 
-  Widget login_button() {
+  Widget signup_button() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: GestureDetector(
@@ -115,7 +127,7 @@ class _LogIn_ScreenState extends State<LogIn_Screen> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: const Text(
-            'LogIn',
+            'Sign up',
             style: TextStyle(
               color: Colors.white,
               fontSize: 23,
@@ -127,44 +139,40 @@ class _LogIn_ScreenState extends State<LogIn_Screen> {
     );
   }
 
-  Widget textfield(TextEditingController _controller, FocusNode _focusNode,
-      String typeName, IconData iconss) {
+  Widget textfield(TextEditingController _controller, FocusNode _focusNode, String typeName, IconData iconss) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(15)),
-        child: TextField(
-          controller: _controller,
-          focusNode: _focusNode,
-          style: const TextStyle(color: Colors.black, fontSize: 18),
-          decoration: InputDecoration(
-            prefixIcon: Icon(
-              iconss,
-              color:
-                  _focusNode.hasFocus ? custom_green : const Color(0xffc5c5c5),
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            hintText: typeName,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xffc5c5c5),
-                width: 2.0,
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15)),
+              child: TextField(
+                controller: _controller,
+                focusNode: _focusNode,
+                style: const TextStyle(color: Colors.black, fontSize: 18),
+                decoration: InputDecoration(
+                  prefixIcon: Icon(iconss, color: _focusNode.hasFocus ? custom_green : const Color(0xffc5c5c5),),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  hintText: typeName,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                      color: Color(0xffc5c5c5),
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: custom_green,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
               ),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: custom_green,
-                width: 2.0,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+          );
   }
 
   Widget image() {
